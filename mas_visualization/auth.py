@@ -10,8 +10,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from database import database
-from models import users
+from mas_visualization.database import database
+from mas_visualization.models import users
 # This should be a long, random string in a real application, stored securely
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')

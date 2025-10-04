@@ -3,11 +3,11 @@ from typing import Dict, List, Optional
 from datetime import datetime, timedelta
 
 from autogen_agentchat.agents import AssistantAgent
-from auth import User 
-from config import model_client
-from data_models import Booking, Commitment
-from database import *
-from models import labs, bookings 
+from mas_visualization.auth import User 
+from mas_visualization.config import model_client
+from mas_visualization.data_models import Booking, Commitment
+from mas_visualization.database import *
+from mas_visualization.models import labs, bookings 
 
 
 class HeadLabAssistantAgent:
