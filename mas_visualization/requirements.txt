@@ -48,6 +48,14 @@ fastapi
 uvicorn
 jinja2
 python-multipart
-# Note: Python 3.10+ required for autogen-agentchat
+# Note: Python 3.10+ required 
+pydantic[email]                                                 
 sqlalchemy
-databases
+python-jose
+passlib
+databases[postgresql]
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+aiosqlite
+uvicorn[standard]
