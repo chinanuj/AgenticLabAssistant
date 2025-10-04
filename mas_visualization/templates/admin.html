@@ -863,7 +863,9 @@
       });
 
       //  WebSocket Connection for Real-time Updates
-      const ws = new WebSocket(`ws://localhost:8000/ws?token=${token}`);
+      const host = window.location.host;
+      const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+      ws = new WebSocket(`${protocol}://${host}/ws?token=${token}`);
       ws.onmessage = function (event) {
         const message = JSON.parse(event.data);
         if (
