@@ -6,10 +6,10 @@ import fastapi
 import sqlalchemy 
 from mas_visualization.auth import User 
 from typing import Dict, List, Any, Optional
-from agents import HeadLabAssistantAgent, LabAgent
-from data_models import Booking 
-from database import database
-from models import users, labs, bookings
+from mas_visualization.agents import HeadLabAssistantAgent, LabAgent
+from mas_visualization.data_models import Booking 
+from mas_visualization.database import database
+from mas_visualization.models import users, labs, bookings
 
 class MultiAgentTrafficSystem:
     """Main system orchestrating all agents"""

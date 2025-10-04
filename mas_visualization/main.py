@@ -11,12 +11,12 @@ from pydantic import BaseModel
 import sqlalchemy
 from pydantic import BaseModel, EmailStr
 import os
-from simulation import MultiAgentTrafficSystem
-from database import database, engine, metadata
-from models import users, labs, bookings
-from auth import pwd_context
+from mas_visualization.simulation import MultiAgentTrafficSystem
+from mas_visualization.database import database, engine, metadata
+from mas_visualization.models import users, labs, bookings
+from mas_visualization.auth import pwd_context
 from fastapi.security import OAuth2PasswordRequestForm
-from auth import (
+from mas_visualization.auth import (
     User,
     Token,
     UserInDB,
