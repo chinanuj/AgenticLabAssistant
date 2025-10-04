@@ -1,7 +1,3 @@
-Of course. Here is the complete, improvised README with the new title and more polished language throughout.
-
------
-
 # AgentX: An Agentic AI for Smart Lab Scheduling
 
 ### A Multi-Agent System for Intelligent Laboratory Booking
