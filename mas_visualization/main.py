@@ -33,7 +33,8 @@ from mas_visualization.auth import (
 
 #FastAPI Setup
 app = fastapi.FastAPI()
-templates = Jinja2Templates(directory="mas_visualization/templates")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 # Lab Management Models and Endpoints 
 class LabCreate(BaseModel):
