@@ -1,6 +1,6 @@
 # models.py
 import sqlalchemy
-from database import metadata
+from mas_visualization.database import metadata
 
 #'users' table
 users = sqlalchemy.Table(
