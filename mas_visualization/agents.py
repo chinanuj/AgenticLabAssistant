@@ -27,7 +27,6 @@ class HeadLabAssistantAgent:
         )
         self.reputation_scores = {name: 10 for name in all_lab_agent_names}
 
-    # --- MODIFIED parse_user_query METHOD ---
     async def parse_user_query(self, query_text: str) -> Optional[Dict]:
         """Uses an LLM to parse a natural language query into a structured dictionary."""
         
@@ -111,7 +110,6 @@ class LabAgent:
         booking_to_shift.end_time += timedelta(minutes=minutes)
         return True
 
-    # --- ENHANCED: evaluate_proposal with more context ---
     async def evaluate_proposal(self, proposal: str, existing_booking: Booking, requester_reputation: int) -> str:
         evaluation_task = f"""
         You are the agent for {self.lab_name}.
