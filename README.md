@@ -11,7 +11,6 @@ The system empowers students and faculty to check lab availability, view schedul
 ### Table of Contents
 
   - [About The Project](https://www.google.com/search?q=%23about-the-project)
-  - [Live Demo](https://www.google.com/search?q=%23live-demo)
   - [Core Features](https://www.google.com/search?q=%23core-features)
   - [System Architecture](https://www.google.com/search?q=%23system-architecture)
   - [Technology Stack](https://www.google.com/search?q=%23technology-stack)
@@ -29,14 +28,6 @@ The system empowers students and faculty to check lab availability, view schedul
 This project originated from a real-world challenge at IIT Jodhpur: the inefficiency of discovering lab availability and the cumbersome process of manually booking slots. AgentX was built to provide a centralized, intelligent solution to this problem.
 
 The core of AgentX is its **Multi-Agent System (MAS)**. Instead of a traditional monolithic backend, the system's intelligence is distributed among autonomous agents. A central `HeadLabAssistantAgent` acts as the primary liaison, communicating with users, while multiple `LabAgents` each represent and manage a physical laboratory. This decentralized architecture enables advanced features like conversational search and creates a foundation for future capabilities such as automated negotiation and adaptive learning among agents.
-
------
-
-## Live Demo
-
-A live version of the project is deployed on Render. You can interact with AgentX here:
-
-[https://smart-lab-assistant.onrender.com](https://smart-lab-assistant.onrender.com)
 
 -----
 
@@ -155,9 +146,10 @@ Follow these instructions to set up and run the project on your local machine fo
         # DATABASE_URL=
         ```
 
-5.  **Run the application:**
+5.  **Run the application by going into mas_visualization folder**
 
     ```sh
+    cd mas_visualization
     uvicorn main:app --reload
     ```
 
