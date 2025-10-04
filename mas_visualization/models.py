@@ -2,7 +2,7 @@
 import sqlalchemy
 from database import metadata
 
-# Define the 'users' table
+#'users' table
 users = sqlalchemy.Table(
     "users",
     metadata,
@@ -14,7 +14,7 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("role", sqlalchemy.String, default="student"),
 )
 
-# Define the 'labs' table
+#'labs' table
 labs = sqlalchemy.Table(
     "labs",
     metadata,
@@ -27,7 +27,7 @@ labs = sqlalchemy.Table(
     sqlalchemy.Column("operating_end_time", sqlalchemy.Time, nullable=True),
 )
 
-# Define the 'bookings' table
+#'bookings' table
 bookings = sqlalchemy.Table(
     "bookings",
     metadata,
