@@ -71,6 +71,8 @@ class PasswordChange(BaseModel):
     new_password: str
 
 
+# mas_visualization/main.py
+
 class ConnectionManager:
     def __init__(self):
         self.active_connections: List[fastapi.WebSocket] = []
@@ -80,11 +82,40 @@ class ConnectionManager:
         self.active_connections.append(websocket)
 
     def disconnect(self, websocket: fastapi.WebSocket):
-        self.active_connections.remove(websocket)
+        if websocket in self.active_connections:
+            self.active_connections.remove(websocket)
 
     async def broadcast(self, message: str):
+        disconnected_connections = []
         for connection in self.active_connections:
-            await connection.send_text(message)
+            try:
+                await connection.send_text(message)
+            except RuntimeError:
+                disconnected_connections.append(connection)
+        for connection in disconnected_connections:
+            self.disconnect(connection)# mas_visualization/main.py
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[fastapi.WebSocket] = []
+
+    async def connect(self, websocket: fastapi.WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: fastapi.WebSocket):
+        if websocket in self.active_connections:
+            self.active_connections.remove(websocket)
+
+    async def broadcast(self, message: str):
+        disconnected_connections = []
+        for connection in self.active_connections:
+            try:
+                await connection.send_text(message)
+            except RuntimeError:
+                disconnected_connections.append(connection)
+        for connection in disconnected_connections:
+            self.disconnect(connection)
 
 manager = ConnectionManager()
 
@@ -323,7 +354,7 @@ async def websocket_endpoint(websocket: fastapi.WebSocket, token: str = Query(No
 
     await manager.connect(websocket)
     # The system is now correctly created with the user context
-    system = MultiAgentTrafficSystem(current_user=current_user, manager=manager) # MODIFIED LINE
+    system = MultiAgentTrafficSystem(current_user=current_user, manager=manager) 
     await system.initialize_system() # Initialize agents from DB
 
     await websocket.send_text(json.dumps({
@@ -385,6 +416,13 @@ async def websocket_endpoint(websocket: fastapi.WebSocket, token: str = Query(No
                 await websocket.send_text(json.dumps({"type": "full_schedule_update", "data": full_schedule_data}))
 
     except fastapi.WebSocketDisconnect:
+        manager.disconnect(websocket)
+    except Exception as e:
+        print(f"An unexpected error occurred in websocket: {e}")
+        # Ensure disconnect is called even on other errors
+        manager.disconnect(websocket)
+    finally:
+        # This will run whether an exception occurred or not
         manager.disconnect(websocket)
 
 
