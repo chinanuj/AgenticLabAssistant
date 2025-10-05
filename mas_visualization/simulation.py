@@ -26,7 +26,7 @@ class MultiAgentTrafficSystem:
 
     async def broadcast_schedule_update(self):
         """Fetches the latest weekly schedule and broadcasts it to all clients."""
-        today = datetime.now()
+        today = datetime.now(timezone.utc)
         start_of_week = today - timedelta(days=today.weekday())
         end_of_week = start_of_week + timedelta(days=7)
         schedule_data = await self.get_schedule_for_range(start_of_week, end_of_week)
@@ -35,7 +35,7 @@ class MultiAgentTrafficSystem:
         
     async def get_full_schedule(self) -> dict:
             """Gathers all schedule data by querying the database."""
-            today = datetime.now()
+            today = datetime.now(timezone.utc)
             start_of_week = today - timedelta(days=today.weekday())
             end_of_week = start_of_week + timedelta(days=7)
             return await self.get_schedule_for_range(start_of_week, end_of_week)

@@ -1,6 +1,6 @@
 import json
 from typing import Dict, List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from autogen_agentchat.agents import AssistantAgent
 from mas_visualization.auth import User 
@@ -33,7 +33,7 @@ class HeadLabAssistantAgent:
         parsing_task = f"""
         You are an expert at parsing user requests for lab bookings. Your task is to extract key details from a query.
 
-        - The current date is {datetime.now().strftime('%A, %Y-%m-%d')}.
+        - The current date is {datetime.now(timezone.utc).strftime('%A, %Y-%m-%d')}.
         - If a specific lab name is mentioned (e.g., "AI Lab", "Robotics Lab"), extract it into a "lab_name" key.
         - If specific equipment or features are mentioned (e.g., "computers", "soldering iron"), extract them as a list in an "equipment" key.
         - If the number of students is not mentioned, default to 1.

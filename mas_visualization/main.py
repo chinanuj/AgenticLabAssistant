@@ -403,7 +403,7 @@ async def websocket_endpoint(websocket: fastapi.WebSocket, token: str = Query(No
                     await websocket.send_text(json.dumps({"type":"booking_confirmation","data":{"message":"Booking cancelled.","booking_id": result.get("booking_id")}}))
 
                     # Broadcast updated schedule (week)
-                    now = datetime.now()
+                    now = datetime.now(timezone.utc)
                     start_of_week = now - timedelta(days=now.weekday())
                     end_of_week = start_of_week + timedelta(days=7)
                     updated_schedule = await system.get_schedule_for_range(start_of_week, end_of_week)
