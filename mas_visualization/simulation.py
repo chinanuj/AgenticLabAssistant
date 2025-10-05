@@ -1,7 +1,7 @@
 # simulation.py
 import asyncio
 import json
-from datetime import datetime, timedelta ,timezone
+from datetime import datetime, timedelta
 import fastapi 
 import sqlalchemy 
 from mas_visualization.auth import User 
@@ -67,9 +67,8 @@ class MultiAgentTrafficSystem:
                 date_str = parsed_request["date"]
                 start_str = parsed_request["start_time"]
                 end_str = parsed_request["end_time"]
-                request_start = datetime.fromisoformat(f"{date_str}T{start_str}").replace(tzinfo=timezone.utc)
-                request_end = datetime.fromisoformat(f"{date_str}T{end_str}").replace(tzinfo=timezone.utc)
-
+                request_start = datetime.fromisoformat(f"{parsed_request['date']}T{parsed_request['start_time']}")
+                request_end = datetime.fromisoformat(f"{parsed_request['date']}T{parsed_request['end_time']}")
             except (ValueError, KeyError):
                 await send_update("error", "Invalid date/time format parsed. Please try again.")
                 return
