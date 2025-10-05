@@ -27,16 +27,18 @@ labs = sqlalchemy.Table(
     sqlalchemy.Column("operating_end_time", sqlalchemy.Time, nullable=True),
 )
 
-#'bookings' table
 bookings = sqlalchemy.Table(
     "bookings",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("lab_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("labs.id")),
     sqlalchemy.Column("user_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
-    sqlalchemy.Column("start_time", sqlalchemy.DateTime),
-    sqlalchemy.Column("end_time", sqlalchemy.DateTime),
+    
+    # FIX: Add (timezone=True) to both DateTime columns
+    sqlalchemy.Column("start_time", sqlalchemy.DateTime(timezone=True)),
+    sqlalchemy.Column("end_time", sqlalchemy.DateTime(timezone=True)),
+
     sqlalchemy.Column("student_count", sqlalchemy.Integer),
-    sqlalchemy.Column("booked_by", sqlalchemy.String), # Keep username for easy access
-    sqlalchemy.Column("priority", sqlalchemy.Integer, default=3), # Add priority with a default value
+    sqlalchemy.Column("booked_by", sqlalchemy.String),
+    sqlalchemy.Column("priority", sqlalchemy.Integer, default=3),
 )
