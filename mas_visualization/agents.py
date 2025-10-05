@@ -1,6 +1,6 @@
 import json
 from typing import Dict, List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta,timezone
 
 from autogen_agentchat.agents import AssistantAgent
 from mas_visualization.auth import User 
@@ -81,7 +81,7 @@ class LabAgent:
             booking_start = booking_data["start_time"]
             booking_end = booking_data["end_time"]
             
-            # if max(booking_start, request_start) < min(booking_end, request_end):
+            # This comparison will now work correctly
             if (request_start < booking_end) and (request_end > booking_start):
                 conflict_details = {
                     "status": "CONFLICT_RIGID", 
