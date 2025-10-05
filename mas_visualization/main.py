@@ -363,7 +363,7 @@ async def websocket_endpoint(websocket: fastapi.WebSocket, token: str = Query(No
     }))
 
 
-    today = datetime.now()
+    today = datetime.now(timezone.utc) 
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=7)
     initial_schedule = await system.get_schedule_for_range(start_of_week, end_of_week)
